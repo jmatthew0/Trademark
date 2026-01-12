@@ -4,7 +4,7 @@ import "../Css/Trademark.css";
 import MarkTypeModal from "./TypeOfMark/MarkTypeModal";
 import FigurativeWithWordsMark from "./TypeOfMark/FigurativeWithWordsMark";
 import ThreeDMark from "./TypeOfMark/ThreeDMark";
-
+import StampedOrMarked from "./TypeOfMark/StampedOrMarked";
 
 export default function Trademark() {
   const [language, setLanguage] = useState("English");
@@ -59,8 +59,8 @@ export default function Trademark() {
   const handleMarkTypeClick = (markId) => {
     setSelectedMarkType(markId);
 
-    // Open modal for the two requested types
-    if (markId === "figurative-words" || markId === "3d") {
+    // Open modal for requested types
+    if (markId === "figurative-words" || markId === "3d" || markId === "stamped") {
       setModalKey(markId);
       setModalOpen(true);
     }
@@ -80,7 +80,7 @@ export default function Trademark() {
   const onModalNext = (payload) => {
     console.log("Modal Next payload:", modalKey, payload);
     closeModal();
-    // You can store payload into state here if you want.
+    // You can store payload into state here if you want
   };
 
   const modalTitle =
@@ -88,6 +88,8 @@ export default function Trademark() {
       ? "Figurative with words mark"
       : modalKey === "3d"
       ? "3D mark"
+      : modalKey === "stamped"
+      ? "Stamped or marked container of good"
       : "Type of mark";
 
   return (
@@ -99,7 +101,8 @@ export default function Trademark() {
 
           <div className="language-info">
             <p className="info-text">
-              Language of the application: <span className="highlight">English</span>.
+              Language of the application:{" "}
+              <span className="highlight">{language}</span>.
             </p>
           </div>
 
@@ -159,12 +162,13 @@ export default function Trademark() {
 
       {/* MODAL */}
       <MarkTypeModal open={modalOpen} title={modalTitle} onClose={closeModal}>
-          {modalKey === "figurative-words" ? (
-      <FigurativeWithWordsMark onNext={onModalNext} />
-    ) : null}
-
+        {modalKey === "figurative-words" ? (
+          <FigurativeWithWordsMark onNext={onModalNext} />
+        ) : null}
 
         {modalKey === "3d" ? <ThreeDMark onNext={onModalNext} /> : null}
+
+        {modalKey === "stamped" ? <StampedOrMarked onNext={onModalNext} /> : null}
       </MarkTypeModal>
     </div>
   );
