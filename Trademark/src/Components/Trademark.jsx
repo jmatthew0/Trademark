@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "../Css/Trademark.css";
 
 import MarkTypeModal from "./TypeOfMark/MarkTypeModal";
+import WordMark from "./TypeOfMark/WordMark";
+import FigurativeMark from "./TypeOfMark/FigurativeMark";
 import FigurativeWithWordsMark from "./TypeOfMark/FigurativeWithWordsMark";
 import ThreeDMark from "./TypeOfMark/ThreeDMark";
 import StampedOrMarked from "./TypeOfMark/StampedOrMarked";
@@ -59,8 +61,7 @@ export default function Trademark() {
   const handleMarkTypeClick = (markId) => {
     setSelectedMarkType(markId);
 
-    // Open modal for requested types
-    if (markId === "figurative-words" || markId === "3d" || markId === "stamped") {
+    if (markId === "word" || markId === "figurative" || markId === "figurative-words" || markId === "3d" || markId === "stamped") {
       setModalKey(markId);
       setModalOpen(true);
     }
@@ -80,11 +81,14 @@ export default function Trademark() {
   const onModalNext = (payload) => {
     console.log("Modal Next payload:", modalKey, payload);
     closeModal();
-    // You can store payload into state here if you want
   };
 
   const modalTitle =
-    modalKey === "figurative-words"
+    modalKey === "word"
+      ? "Word mark"
+      : modalKey === "figurative"
+      ? "Figurative mark"
+      : modalKey === "figurative-words"
       ? "Figurative with words mark"
       : modalKey === "3d"
       ? "3D mark"
@@ -95,7 +99,6 @@ export default function Trademark() {
   return (
     <div className="trademark-container">
       <div className="trademark-form">
-        {/* Language Section */}
         <div className="form-section">
           <h2 className="section-title">Language</h2>
 
@@ -121,7 +124,6 @@ export default function Trademark() {
           </div>
         </div>
 
-        {/* Type of Mark Section */}
         <div className="form-section">
           <h2 className="section-title">Type of mark</h2>
 
@@ -149,7 +151,6 @@ export default function Trademark() {
           </div>
         </div>
 
-        {/* Next Button */}
         <div className="button-section">
           <button className="next-button" onClick={handleNext}>
             Next
@@ -160,8 +161,15 @@ export default function Trademark() {
         </div>
       </div>
 
-      {/* MODAL */}
       <MarkTypeModal open={modalOpen} title={modalTitle} onClose={closeModal}>
+        {modalKey === "word" ? (
+          <WordMark onNext={onModalNext} />
+        ) : null}
+
+        {modalKey === "figurative" ? (
+          <FigurativeMark onNext={onModalNext} />
+        ) : null}
+
         {modalKey === "figurative-words" ? (
           <FigurativeWithWordsMark onNext={onModalNext} />
         ) : null}

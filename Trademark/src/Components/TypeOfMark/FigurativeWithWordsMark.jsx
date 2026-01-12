@@ -16,7 +16,6 @@ export default function FigurativeWithWordsMark({ onNext }) {
 
   return (
     <div className="tm-modal-body">
-      <h2 className="tm-modal-title">Figurative with words mark</h2>
       <p className="tm-modal-help">
         Please attach reproduction of the mark. (The mark must not exceed 8cm × 8cm. If colour/s is/are claimed, the
         reproduction must show the colour/s claimed.)

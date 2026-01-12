@@ -15,7 +15,6 @@ export default function StampedOrMarked({ onNext }) {
 
   return (
     <div className="tm-modal-body">
-      <h2 className="tm-modal-title">Stamped or marked container of good</h2>
 
       <p className="tm-modal-help">
         Please attach reproduction of the mark. (The mark must not exceed 8cm × 8cm.
