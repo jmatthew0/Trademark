@@ -1,0 +1,244 @@
+/* Trademark Container */
+.trademark-container {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding: 2rem;
+}
+
+.trademark-form {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 0.5rem;
+}
+
+/* Form Section */
+.form-section {
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.form-section:last-of-type {
+  border-bottom: none;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 1.5rem 0;
+  padding-bottom: 0.75rem;
+  border-bottom: 3px solid #1f2937;
+  display: inline-block;
+}
+
+.section-description {
+  color: #374151;
+  margin: 0 0 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+/* Language Section */
+.language-info {
+  margin-bottom: 1.5rem;
+}
+
+.info-text {
+  color: #374151;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.highlight {
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.field-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.required {
+  color: #dc2626;
+}
+
+.select-input {
+  width: 200px;
+  padding: 0.5rem 2rem 0.5rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.25rem;
+  font-size: 0.95rem;
+  color: #1f2937;
+  background-color: white;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236b7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  background-size: 1.25rem;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+}
+
+.select-input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Mark Types Grid */
+.mark-types-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+.mark-card {
+  border: 2px solid #d1d5db;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  background-color: white;
+}
+
+.mark-card:hover {
+  border-color: #3b82f6;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.mark-card.selected {
+  border-color: #2563eb;
+  background-color: #eff6ff;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.mark-card-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.mark-icon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.text-icon {
+  background-color: #1e3a8a;
+  color: white;
+}
+
+.shape-icon {
+  background-color: #1e3a8a;
+  color: white;
+  font-size: 2rem;
+}
+
+.combined-icon {
+  background-color: #1e3a8a;
+  color: white;
+  border: 3px solid white;
+  box-shadow: 0 0 0 2px #1e3a8a;
+}
+
+.mark-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+  flex: 1;
+}
+
+.mark-description {
+  color: #4b5563;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.card-corner-indicator {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  color: #d1d5db;
+  font-size: 1.5rem;
+}
+
+/* Button Section */
+.button-section {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2rem;
+}
+
+.next-button {
+  background-color: #2563eb;
+  color: white;
+  padding: 0.625rem 1.5rem;
+  border-radius: 0.375rem;
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background-color 0.2s;
+}
+
+.next-button:hover {
+  background-color: #1d4ed8;
+}
+
+.button-arrow {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .trademark-container {
+    padding: 1rem;
+  }
+
+  .trademark-form {
+    padding: 1.5rem;
+  }
+
+  .mark-types-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section-title {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .mark-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .select-input {
+    width: 100%;
+  }
+}
