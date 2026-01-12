@@ -1,0 +1,90 @@
+:root {
+    --ipo-orange: #e56a2a;
+    --ipo-orange-dark: #cc561f;
+  }
+  
+  /* Page background same as login */
+  .dashboard-page {
+    min-height: 100vh;
+    background:
+      linear-gradient(120deg,
+        #fce7dc 0%,
+        #ffffff 20%,
+        #ffffff 80%,
+        #fce7dc 100%
+      );
+  }
+  
+  /* Header */
+  .dashboard-header {
+    background: white;
+    padding: 18px 40px;
+    border-bottom: 4px solid var(--ipo-orange);
+  }
+  
+  .dashboard-brand {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  .dashboard-logo {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .dashboard-title {
+    line-height: 1.2;
+  }
+  
+  .dashboard-title strong {
+    font-size: 16px;
+    display: block;
+  }
+  
+  .dashboard-title span {
+    font-size: 14px;
+  }
+  
+  .dashboard-title small {
+    font-size: 12px;
+    color: var(--ipo-orange);
+  }
+  
+  /* Main */
+  .dashboard-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 90px);
+    text-align: center;
+  }
+  
+  .dashboard-main h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+  }
+  
+  .dashboard-main p {
+    color: #555;
+    margin-bottom: 40px;
+  }
+  
+  /* Button */
+  .file-trademark-btn {
+    background: linear-gradient(90deg, var(--ipo-orange-dark), var(--ipo-orange));
+    border: none;
+    padding: 18px 48px;
+    border-radius: 14px;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(229,106,42,.4);
+  }
+  
+  .file-trademark-btn:hover {
+    filter: brightness(1.05);
+  }
+  
