@@ -1,144 +1,200 @@
-import React, { useState } from 'react';
-import { Link } from "react-router-dom";
-import { FcGoogle } from 'react-icons/fc';
-import { BsWindows } from 'react-icons/bs';
-import { FaEye, FaEyeSlash } from "react-icons/fa";
-import ipoLogo from "../assets/IPOPHL-logo.png";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "../Css/Register.css";
+import ipoLogo from "../assets/IPOPHL-logo.png";
+
+import { MdEmail } from "react-icons/md";
+import { FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
+import { BsWindows } from "react-icons/bs";
 
 export default function Register() {
+  const navigate = useNavigate();
+
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState("");
 
-  const handleSignUp = (e) => {
-    e.preventDefault();
-    console.log('Sign up clicked', { username, password });
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+    setError("");
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
     setError("");
 
-    if (!form.usernameOrEmail.trim() || !form.password.trim()) {
-      setError("All fields are required.");
+    if (!form.email.trim() || !form.password.trim() || !form.confirmPassword.trim()) {
+      setError("Please fill in all fields.");
       return;
     }
 
+    if (form.password !== form.confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+
+    // TODO: replace with backend registration call
     navigate("/login");
   };
 
+  const signUpWithGoogle = () => alert("Google sign-up not yet wired.");
+  const signUpWithMicrosoft = () => alert("Microsoft sign-up not yet wired.");
+
   return (
-    <div className="registration-container">
-      <div className="registration-card">
-        <div className="header-section">
-          <div className="header-content">
-            <img 
-                src={ipoLogo} 
-                alt="IPOPHL Logo" 
-                className="register-logo" 
-            />
+    <div className="login-page">
+      <div className="login-card" role="main" aria-label="Sign up">
+        <header className="login-header">
+          <img className="login-logo" src={ipoLogo} alt="IPOPHL logo" />
+          <div className="login-header-text">
+            <div className="login-org">
+              INTELLECTUAL PROPERTY
+              <br />
+              OFFICE OF THE PHILIPPINES
+            </div>
+            <div className="login-subtitle">Document Management System</div>
+          </div>
+        </header>
 
-            <div className="header-text">
-              <h1 className="header-title">
-                INTELLECTUAL PROPERTY<br />
-                OFFICE OF THE PHILIPPINES
-              </h1>
-              <p className="header-subtitle">Document Management System</p>
+        <h1 className="login-title">Create Account</h1>
+        <p className="login-lead">Sign up to get started</p>
+
+        <form className="login-form" onSubmit={onSubmit}>
+          {error ? (
+            <div className="login-alert" role="alert">
+              {error}
+            </div>
+          ) : null}
+
+          {/* Email */}
+          <div className="field">
+            <label htmlFor="email" className="label">
+              Email
+            </label>
+
+            <div className="input-icon-wrap">
+              <MdEmail className="input-icon" size={18} aria-hidden="true" />
+              <input
+                id="email"
+                name="email"
+                type="email"
+                className="input input-with-icon"
+                placeholder="Email address"
+                value={form.email}
+                onChange={onChange}
+                autoComplete="email"
+              />
             </div>
           </div>
-        </div>
 
-        <div className="welcome-section">
-          <h2 className="welcome-title">Welcome to IPOPHIL</h2>
-          <p className="welcome-subtitle">Create your account</p>
-        </div>
+          {/* Password */}
+          <div className="field">
+            <label htmlFor="password" className="label">
+              Password
+            </label>
 
-        <div className="form-section">
-          <div className="form-group">
-            <label className="form-label">Username or Email</label>
-            <input
-              type="text"
-              placeholder="Username or Email"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              className="form-input"
-            />
-          </div>
+            <div className="password-wrap">
+              <FaLock className="input-icon left" size={16} aria-hidden="true" />
 
-          <div className="form-group">
-            <label className="form-label">Password</label>
-            <div className="password-input-wrapper">
               <input
+                id="password"
+                name="password"
                 type={showPassword ? "text" : "password"}
-                placeholder="········"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="form-input password-input"
+                className="input input-with-left-icon"
+                placeholder="Password"
+                value={form.password}
+                onChange={onChange}
+                autoComplete="new-password"
               />
 
-              <span
-                className="toggle-password"
-                onClick={() => setShowPassword(!showPassword)}
+              <button
+                type="button"
+                className="eye-btn"
+                onClick={() => setShowPassword((s) => !s)}
+                aria-label="Toggle password visibility"
+                title={showPassword ? "Hide password" : "Show password"}
               >
-                {showPassword ? <FaEyeSlash /> : <FaEye />}
-              </span>
+                {showPassword ? <FaEyeSlash size={16} /> : <FaEye size={16} />}
+              </button>
             </div>
           </div>
 
-          <div className="form-group">
-            <label className="form-label">Confirm Password</label>
-            <div className="password-input-wrapper">
+          {/* Confirm Password */}
+          <div className="field">
+            <label htmlFor="confirmPassword" className="label">
+              Confirm Password
+            </label>
+
+            <div className="password-wrap">
+              <FaLock className="input-icon left" size={16} aria-hidden="true" />
+
               <input
+                id="confirmPassword"
+                name="confirmPassword"
                 type={showConfirmPassword ? "text" : "password"}
-                placeholder="········"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                className="form-input password-input"
+                className="input input-with-left-icon"
+                placeholder="Confirm Password"
+                value={form.confirmPassword}
+                onChange={onChange}
+                autoComplete="new-password"
               />
-              <span
-                className="toggle-password"
-                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+
+              <button
+                type="button"
+                className="eye-btn"
+                onClick={() => setShowConfirmPassword((s) => !s)}
+                aria-label="Toggle confirm password visibility"
+                title={showConfirmPassword ? "Hide password" : "Show password"}
               >
-                {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
-              </span>
+                {showConfirmPassword ? <FaEyeSlash size={16} /> : <FaEye size={16} />}
+              </button>
             </div>
           </div>
 
-          <button
-            onClick={onSubmit}
-            className="signin-button"
-          >
-            Sign Up
-            <svg className="button-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
+          {/* Sign up */}
+          <button className="primary-btn" type="submit">
+            <span>Sign up</span>
+            <span className="arrow" aria-hidden="true">
+              →
+            </span>
           </button>
 
-          <div className="social-buttons">
-            <button
-              className="social-button google-login"
-              title="Sign in with Google"
-            >
-              <FcGoogle size={24} />
-            </button>
+          <div className="divider" aria-hidden="true" />
 
-            <button
-              className="social-button microsoft-login"
-              title="Sign in with Microsoft"
-            >
-              <BsWindows size={24} color="#0078D4" />
-            </button>
+          {/* Google */}
+          <button type="button" className="oauth-btn" onClick={signUpWithGoogle}>
+            <FcGoogle size={20} aria-hidden="true" />
+            <span>Sign up with Google</span>
+          </button>
+
+          {/* Microsoft */}
+          <button
+            type="button"
+            className="oauth-btn"
+            onClick={signUpWithMicrosoft}
+          >
+            <BsWindows size={18} color="#0078D4" aria-hidden="true" />
+            <span>Sign up with Microsoft</span>
+          </button>
+
+          {/* Sign in */}
+          <div className="signup-row">
+            <span>Already have an account?</span>
+            <Link to="/login" className="signup-link">
+              Sign in
+            </Link>
           </div>
-            <div className="login-row">
-                <span>Already have an account?</span>
-                <Link to="/login" className="login-link">
-                    Sign In
-                </Link>
-            </div>
-        </div>
+        </form>
       </div>
     </div>
   );

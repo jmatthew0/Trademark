@@ -119,7 +119,6 @@ export default function Trademark() {
               onChange={(e) => setLanguage(e.target.value)}
             >
               <option value="English">English</option>
-              <option value="Filipino">Filipino</option>
             </select>
           </div>
         </div>
