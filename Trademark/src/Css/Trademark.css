@@ -204,6 +204,8 @@
   transition: background-color 0.2s;
 }
 
+
+
 .next-button:hover {
   background-color: #1d4ed8;
 }
@@ -241,4 +243,14 @@
   .select-input {
     width: 100%;
   }
+}
+
+.button-section {
+  width: 100%;
+  display: flex !important;
+  justify-content: flex-end !important;
+}
+
+.next-button {
+  margin-left: auto;
 }

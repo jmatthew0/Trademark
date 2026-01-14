@@ -9,19 +9,35 @@ export default function StampedOrMarked({ onNext }) {
   const [hasColor, setHasColor] = useState(false);
   const [files, setFiles] = useState([]);
 
+  // ✅ persistent preview
+  const [imagePreview, setImagePreview] = useState("");
+
   const handleFiles = (e) => {
-    setFiles(Array.from(e.target.files || []));
+    const selected = Array.from(e.target.files || []);
+    setFiles(selected);
+
+    const first = selected?.[0];
+    if (!first) {
+      setImagePreview("");
+      return;
+    }
+
+    if (first.type?.startsWith("image/")) {
+      const reader = new FileReader();
+      reader.onload = () => setImagePreview(reader.result); // DataURL
+      reader.readAsDataURL(first);
+    } else {
+      setImagePreview("");
+    }
   };
 
   return (
     <div className="tm-modal-body">
-
       <p className="tm-modal-help">
         Please attach reproduction of the mark. (The mark must not exceed 8cm × 8cm.
         If colour/s is/are claimed, the reproduction must show the colour/s claimed.)
       </p>
 
-      {/* FILE UPLOAD */}
       <div className="tm-field">
         <label className="tm-label">Attach attachment(s)</label>
         <div className="tm-file-row">
@@ -33,78 +49,59 @@ export default function StampedOrMarked({ onNext }) {
             {files.length ? `${files.length} file(s) selected` : "No files selected"}
           </div>
         </div>
+
+        {/* ✅ optional preview */}
+        {imagePreview && (
+          <div style={{ marginTop: 12 }}>
+            <img
+              src={imagePreview}
+              alt="Uploaded mark preview"
+              style={{ width: "100%", maxWidth: 420, borderRadius: 8, border: "1px solid #e5e7eb" }}
+            />
+          </div>
+        )}
       </div>
 
-      {/* TRADEMARK */}
       <div className="tm-field">
         <label className="tm-label">
           Trade mark <span className="tm-required">*</span>
         </label>
-        <input
-          className="tm-input"
-          value={tradeMark}
-          onChange={(e) => setTradeMark(e.target.value)}
-        />
+        <input className="tm-input" value={tradeMark} onChange={(e) => setTradeMark(e.target.value)} />
       </div>
 
-      {/* DESCRIPTION */}
       <div className="tm-field tm-two-col">
         <div>
           <label className="tm-label">
-            Description of the mark, if there is a claim of color/s specify the
-            principal parts of the mark that are in the color/s identified.
+            Description of the mark, if there is a claim of color/s specify the principal parts of the mark that are in the
+            color/s identified.
           </label>
-          <textarea
-            className="tm-textarea"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
+          <textarea className="tm-textarea" value={description} onChange={(e) => setDescription(e.target.value)} />
         </div>
-        <div className="tm-sidehint">
-          Fill this field with the description of the mark being applied for.
-        </div>
+        <div className="tm-sidehint">Fill this field with the description of the mark being applied for.</div>
       </div>
 
-      {/* DISCLAIMER */}
       <div className="tm-field tm-two-col">
         <div>
           <label className="tm-label">
-            Disclaimer, if any (any word/s or component of the mark over which no
-            exclusive right is claimed)
+            Disclaimer, if any (any word/s or component of the mark over which no exclusive right is claimed)
           </label>
-          <textarea
-            className="tm-textarea"
-            value={disclaimer}
-            onChange={(e) => setDisclaimer(e.target.value)}
-          />
+          <textarea className="tm-textarea" value={disclaimer} onChange={(e) => setDisclaimer(e.target.value)} />
         </div>
-        <div className="tm-sidehint">
-          Fill in this field with the disclaimer of the mark being applied for.
-        </div>
+        <div className="tm-sidehint">Fill in this field with the disclaimer of the mark being applied for.</div>
       </div>
 
-      {/* CHECKBOXES */}
       <div className="tm-checks">
         <label className="tm-check">
-          <input
-            type="checkbox"
-            checked={isCollective}
-            onChange={(e) => setIsCollective(e.target.checked)}
-          />
+          <input type="checkbox" checked={isCollective} onChange={(e) => setIsCollective(e.target.checked)} />
           <span>Check if it is a collective mark.</span>
         </label>
 
         <label className="tm-check">
-          <input
-            type="checkbox"
-            checked={hasColor}
-            onChange={(e) => setHasColor(e.target.checked)}
-          />
+          <input type="checkbox" checked={hasColor} onChange={(e) => setHasColor(e.target.checked)} />
           <span>Check if your trade mark contain any colour.</span>
         </label>
       </div>
 
-      {/* FOOTER */}
       <div className="tm-modal-footer">
         <button
           className="tm-next"
@@ -117,6 +114,7 @@ export default function StampedOrMarked({ onNext }) {
               isCollective,
               hasColor,
               files,
+              imagePreview, // ✅ used by Confirmation
             })
           }
         >
