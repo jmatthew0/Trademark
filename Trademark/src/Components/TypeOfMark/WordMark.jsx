@@ -397,7 +397,7 @@ export default function WordMark({ onNext }) {
         </div>
 
         <div className="tm-field">
-          <button type="button" className="tm-search-button" onClick={() => console.log("Search clicked")}>
+          <button type="button" className="tm-search-button">
             Search
           </button>
           <button type="button" className="tm-provide-list-button" onClick={() => setProvideListModalOpen(true)}>
