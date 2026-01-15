@@ -1,11 +1,263 @@
-/* WordMark Component Styles */
-
 :root {
   --ipo-orange: #e56a2a;
+  --border: #e5e7eb;
   --text: #111827;
+  --muted: #6b7280;
 }
 
-/* Sections */
+.tm-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+}
+
+.tm-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(17, 24, 39, 0.55);
+}
+
+.tm-modal {
+  position: relative;
+  width: min(980px, calc(100vw - 32px));
+  max-height: calc(100vh - 60px);
+  overflow: auto;
+  margin: 30px auto;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(229, 231, 235, 0.8);
+}
+
+.tm-modal-head {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(229, 231, 235, 0.8);
+}
+
+.tm-modal-head-title {
+  font-weight: 900;
+  color: var(--text);
+}
+
+.tm-modal-x {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #fff;
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.tm-modal-x:hover {
+  border-color: rgba(229, 106, 42, 0.55);
+  box-shadow: 0 0 0 4px rgba(229, 106, 42, 0.12);
+}
+
+.tm-modal-content {
+  padding: 16px;
+}
+
+.tm-modal-body {
+  color: var(--text);
+}
+
+.tm-modal-title {
+  margin: 0 0 6px;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.tm-modal-help {
+  margin: 0 0 14px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+  font-weight: 700;
+}
+
+.tm-field {
+  margin: 14px 0;
+}
+
+.tm-label {
+  display: block;
+  font-weight: 800;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.tm-required {
+  color: #dc2626;
+}
+
+.tm-input,
+.tm-textarea {
+  width: 100%;
+  border: 1px solid rgba(229, 231, 235, 0.95);
+  border-radius: 10px;
+  padding: 12px 12px;
+  font-size: 14px;
+  outline: none;
+  background: #fff;
+}
+
+.tm-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.tm-input:focus,
+.tm-textarea:focus {
+  border-color: rgba(229, 106, 42, 0.7);
+  box-shadow: 0 0 0 4px rgba(229, 106, 42, 0.12);
+}
+
+.tm-input-error {
+  border-color: #dc2626 !important;
+  box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.12) !important;
+}
+
+.tm-error-message {
+  display: block;
+  color: #dc2626;
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.tm-two-col {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 14px;
+}
+
+@media (max-width: 900px) {
+  .tm-two-col {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tm-sidehint {
+  font-size: 12px;
+  color: #9ca3af;
+  padding-top: 28px;
+}
+
+.tm-file-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.tm-file-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 12px;
+  border: 1px solid rgba(229, 231, 235, 0.95);
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 800;
+  background: #fff;
+}
+
+.tm-file-btn:hover {
+  border-color: rgba(229, 106, 42, 0.55);
+  box-shadow: 0 0 0 4px rgba(229, 106, 42, 0.12);
+}
+
+.tm-file-meta {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.tm-checks {
+  display: grid;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.tm-check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #374151;
+  font-size: 14px;
+}
+
+.tm-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.tm-previous {
+  background: #f3f4f6;
+  color: #374151;
+  border: 1px solid rgba(229, 231, 235, 0.95);
+  border-radius: 12px;
+  padding: 12px 16px;
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.tm-previous:hover {
+  background: #e5e7eb;
+}
+
+.tm-next {
+  background: linear-gradient(90deg, #cc561f, var(--ipo-orange));
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 16px;
+  cursor: pointer;
+  font-weight: 900;
+  box-shadow: 0 10px 30px rgba(229, 106, 42, 0.25);
+}
+
+.tm-next:hover {
+  filter: brightness(1.03);
+}
+
+.tm-search-button,
+.tm-provide-list-button {
+  background: #f3f4f6;
+  color: #374151;
+  border: 1px solid rgba(229, 231, 235, 0.95);
+  border-radius: 12px;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-weight: 800;
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+.tm-search-button:hover,
+.tm-provide-list-button:hover {
+  background: #e5e7eb;
+  border-color: rgba(229, 106, 42, 0.7);
+}
+
+.tm-link {
+  color: var(--ipo-orange);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.tm-link:hover {
+  text-decoration: underline;
+}
+
 .tm-section {
   margin-bottom: 28px;
 }
@@ -19,7 +271,6 @@
   border-bottom: 2px solid rgba(229, 231, 235, 0.8);
 }
 
-/* Important Notice */
 .tm-important-notice {
   background: #fef3c7;
   border-left: 4px solid #f59e0b;
@@ -35,7 +286,6 @@
   color: #92400e;
 }
 
-/* Search Result */
 .tm-search-result {
   padding: 12px 0;
   color: var(--text);
@@ -46,7 +296,6 @@
   margin: 0;
 }
 
-/* Priority Claim */
 .tm-question {
   color: var(--text);
   font-size: 14px;
@@ -85,7 +334,6 @@
   box-shadow: 0 4px 12px rgba(229, 106, 42, 0.2);
 }
 
-/* Add Buttons */
 .tm-add-container {
   margin-bottom: 16px;
 }
@@ -118,7 +366,6 @@
   font-weight: 700;
 }
 
-/* Items List */
 .tm-items-list {
   display: flex;
   flex-direction: column;
@@ -172,7 +419,6 @@
   font-style: italic;
 }
 
-/* Confirmation Page Styles */
 .tm-confirmation-header {
   margin-bottom: 24px;
   border-bottom: 2px solid rgba(229, 231, 235, 0.8);
@@ -439,8 +685,6 @@
   filter: brightness(1.03);
 }
 
-/* Provide List Modal Styles */
-
 .provide-list-overlay {
   position: fixed;
   inset: 0;
@@ -648,8 +892,6 @@
   background: #0369a1;
 }
 
-/* Goods and Services Table Styles */
-
 .tm-goods-services-table-container {
   margin: 20px 0;
   border: 1px solid rgba(229, 231, 235, 0.95);
@@ -802,8 +1044,6 @@
   font-weight: 700;
 }
 
-/* Priority Claim Form Styles */
-
 .tm-priority-claim-form {
   background: #f9fafb;
   border: 1px solid rgba(229, 231, 235, 0.95);
@@ -928,8 +1168,6 @@
   color: #0284c7;
 }
 
-/* Applicant Form Styles */
-
 .tm-applicant-form {
   background: #f9fafb;
   border: 1px solid rgba(229, 231, 235, 0.95);
@@ -992,7 +1230,6 @@
   width: 100%;
 }
 
-/* Representative Form Styles */
 .tm-representative-form {
   background: #f9fafb;
   border: 1px solid rgba(229, 231, 235, 0.95);
